@@ -46,7 +46,7 @@ def plot_admixture(admixture, population_indices, population_labels, title):
     for p,popname in enumerate(population_labels):
         indices = np.where(population_indices==p)[0]
         if indices.size>0:
-            vline_pos = (indices.max()+1)*indiv_width 
+            vline_pos = (indices.max()+1)*indiv_width
             subplot.axvline(vline_pos, linestyle='-', linewidth=0.2, c='#888888')
             label_position = (xmin+(2*indices.min()+indices.size)*0.5*indiv_width, ymin-0.01)
             figure.text(label_position[0], label_position[1], popname, fontsize=6, color='k', \
@@ -139,9 +139,7 @@ def usage():
     print "\t --popfile=<file> (file with known categorical labels; optional)"
     print "\t --title=<figure title> (a title for the figure; optional)"
 
-
-if __name__=="__main__":
-
+def main():
     # parse command-line options
     argv = sys.argv[1:]
     smallflags = "K:"
@@ -157,7 +155,7 @@ if __name__=="__main__":
         sys.exit(2)
 
     params = parseopts(opts)
-    
+
     # get the data to be plotted
     admixture, population_indices, population_labels = get_admixture_proportions(params)
     if params.has_key('title'):
@@ -168,3 +166,6 @@ if __name__=="__main__":
     # plot the data
     figure = plot_admixture(admixture, population_indices, population_labels, title)
     figure.savefig(params['outputfile'], dpi=300)
+
+if __name__=="__main__":
+    main()

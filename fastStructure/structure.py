@@ -1,6 +1,6 @@
 
 import numpy as np
-import fastStructure 
+import fastStructure
 import parse_bed
 import parse_str
 import random
@@ -49,7 +49,7 @@ def parseopts(opts):
 
         elif opt in ["--cv"]:
             params['cv'] = int(arg)
-        
+
         elif opt in ["--tol"]:
             params['mintol'] = float(arg)
 
@@ -72,7 +72,7 @@ def checkopts(params):
     if params['mintol']<=0:
         print "a non-positive value was provided as convergence criterion"
         raise ValueError
-    
+
     if params['cv']<0:
         print "a negative value was provided for the number of cross-validations folds"
         raise ValueError
@@ -88,15 +88,15 @@ def checkopts(params):
     if params['K']<=0:
         print "a negative value was provided for the number of populations"
         raise ValueError
-    
+
     if not params.has_key('inputfile'):
         print "an input file needs to be provided"
-        raise KeyError 
+        raise KeyError
 
     if not params.has_key('outputfile'):
         print "an output file needs to be provided"
         raise KeyError
-    
+
 def write_output(Q, P, other, params):
 
     """
@@ -123,7 +123,7 @@ def write_output(Q, P, other, params):
         handle.close()
 
 def usage():
-    
+
     """
     brief description of various flags and options for this script
     """
@@ -141,12 +141,11 @@ def usage():
     print "\t --seed=<int> (manually specify seed for random number generator; optional)"
 
 
-if __name__=="__main__":
-
+def main():
     # parse command-line options
     argv = sys.argv[1:]
     smallflags = "K:"
-    bigflags = ["prior=", "tol=", "input=", "output=", "cv=", "seed=", "format=", "full"] 
+    bigflags = ["prior=", "tol=", "input=", "output=", "cv=", "seed=", "format=", "full"]
     try:
         opts, args = getopt.getopt(argv, smallflags, bigflags)
         if not opts:
@@ -179,3 +178,6 @@ if __name__=="__main__":
 
     # write out inferred parameters
     write_output(Q, P, other, params)
+
+if __name__=="__main__":
+    main()

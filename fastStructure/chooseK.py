@@ -83,8 +83,8 @@ def usage():
     print "Usage: python %s"%sys.argv[0]
     print "\t --input=<file>"
 
-if __name__=="__main__":
 
+def main():
     # parse command-line options
     argv = sys.argv[1:]
     smallflags = ""
@@ -110,3 +110,6 @@ if __name__=="__main__":
 
     print "Model complexity that maximizes marginal likelihood = %d"%Ks[np.argmax(marginal_likelihoods)]
     print "Model components used to explain structure in data = %d"%np.argmax(np.bincount(bestKs)) 
+
+if __name__=="__main__":
+    main()
